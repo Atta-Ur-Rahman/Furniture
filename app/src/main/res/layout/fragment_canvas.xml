@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CanvasFragment">
+
+    <RelativeLayout
+        android:id="@+id/parentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF" />
+    <Button
+        android:id="@+id/btn_save_canvas"
+        android:layout_width="match_parent"
+        android:layout_height="35sp"
+        android:layout_gravity="bottom"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:background="@drawable/wood_back"
+        android:text="save"/>
+</FrameLayout>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Naveed Khan Furniture House</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="item_name">Item Name</string>
+</resources>

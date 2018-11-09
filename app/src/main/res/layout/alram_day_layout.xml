@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="10sp"
+    android:background="@drawable/dialog_view">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change Alarm Day"
+        android:gravity="center"
+        android:layout_marginTop="10sp"
+        android:textColor="@color/wood_color"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+
+
+    <EditText
+        android:id="@+id/et_input_day"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:hint="Enter day"
+        android:inputType="number"
+        android:textCursorDrawable="@drawable/cursor_color"
+        app:backgroundTint="@color/light_wood_color"
+        android:layout_marginTop="30sp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
+        android:nextFocusDown="@id/et_view_item_order_place_time"/>
+
+    <Button
+        android:id="@+id/btn_inputday"
+        android:layout_width="match_parent"
+        android:layout_height="35sp"
+        android:background="@color/wood_color"
+        android:layout_gravity="center"
+        android:text="Done"
+        android:layout_margin="20sp"
+        android:textColor="@color/white"/>
+</LinearLayout>
