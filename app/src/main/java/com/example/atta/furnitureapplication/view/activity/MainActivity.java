@@ -1,4 +1,4 @@
-package com.example.atta.furnitureapplication;
+package com.example.atta.furnitureapplication.view.activity;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -27,12 +27,17 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.atta.furnitureapplication.R;
+import com.example.atta.furnitureapplication.GenrelUtills.Utilities;
+import com.example.atta.furnitureapplication.dataBase.Furniture_CURD;
+import com.example.atta.furnitureapplication.services.RemainderService;
+import com.example.atta.furnitureapplication.view.fragment.ActiveOrderListFragment;
+import com.example.atta.furnitureapplication.view.fragment.AddOrderFragment;
+import com.example.atta.furnitureapplication.view.fragment.OrderListFragment;
+
 import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,12 +59,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         furniture_curd = new Furniture_CURD(this);
-        if (Utilities.getSharedPreferences(MainActivity.this).getBoolean("start_services", true)) {
 
             startService(new Intent(MainActivity.this, RemainderService.class));
-            Utilities.putValueInEditor(this).putBoolean("start_services", false).commit();
 
-        }
+
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -95,9 +98,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new LastFragment(), "ACTIVE ORDERS");
+        adapter.addFragment(new ActiveOrderListFragment(), "ACTIVE ORDERS");
         adapter.addFragment(new OrderListFragment(), "ALL ORDERS");
-        adapter.addFragment(new OrderFragment(), "ADD ORDER");
+        adapter.addFragment(new AddOrderFragment(), "ADD ORDER");
         viewPager.setAdapter(adapter);
 
 

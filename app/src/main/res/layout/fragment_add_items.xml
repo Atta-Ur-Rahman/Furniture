@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddItemsFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.fragment.AddItemsFragment"
     android:background="@color/light_wood_color"
     android:orientation="vertical">
 
@@ -68,7 +69,7 @@
         android:orientation="horizontal">
 
         <TextView
-
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="50sp"
             android:layout_weight="0.7"
@@ -80,6 +81,7 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_total_price"
             android:layout_width="wrap_content"
             android:layout_height="50sp"
@@ -90,6 +92,23 @@
             android:gravity="center_vertical"
             android:textSize="18sp"
             android:textStyle="bold"/>
+
+        <ng.max.slideview.SlideView
+            android:id="@+id/slideView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="10sp"
+            app:sv_buttonBackgroundColor="@color/slide_button"
+            app:sv_buttonImage="@drawable/account"
+            app:sv_slideBackgroundColor="@color/light_wood_color"
+            app:sv_slideTextColor="@color/white"
+            app:sv_slideTextSize="16sp"
+            app:sv_animateSlideText="true"
+            app:sv_reverseSlide="false"
+            app:sv_strokeColor="@color/white"
+            app:sv_buttonImageDisabled="@drawable/add" />
+
 
 
     </LinearLayout>

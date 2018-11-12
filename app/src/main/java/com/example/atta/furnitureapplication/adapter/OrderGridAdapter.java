@@ -1,4 +1,4 @@
-package com.example.atta.furnitureapplication;
+package com.example.atta.furnitureapplication.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,9 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.atta.furnitureapplication.R;
+import com.example.atta.furnitureapplication.GenrelUtills.Utilities;
+import com.example.atta.furnitureapplication.dataBase.Furniture_CURD;
+import com.example.atta.furnitureapplication.view.fragment.AddItemsFragment;
+import com.example.atta.furnitureapplication.view.fragment.ItemPhotoViewFragment;
 
 import java.util.List;
 
@@ -68,7 +72,7 @@ public class OrderGridAdapter extends ArrayAdapter {
 
 
                 Utilities.putValueInEditor(context).putString("image_uri", furniture_model.getItem_image()).commit();
-                Utilities.connectFragment(context, new PhotoViewFragment());
+                Utilities.connectFragment(context, new ItemPhotoViewFragment());
 
 
             }

@@ -1,4 +1,4 @@
-package com.example.atta.furnitureapplication;
+package com.example.atta.furnitureapplication.services;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

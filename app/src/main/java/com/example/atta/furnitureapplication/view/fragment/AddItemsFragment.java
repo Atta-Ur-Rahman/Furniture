@@ -1,10 +1,10 @@
-package com.example.atta.furnitureapplication;
+package com.example.atta.furnitureapplication.view.fragment;
 
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,16 +14,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.StrictMode;
+import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,19 +34,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.atta.furnitureapplication.dataBase.Furniture_CURD;
+import com.example.atta.furnitureapplication.adapter.Furniture_Model;
+import com.example.atta.furnitureapplication.adapter.OrderGridAdapter;
 import com.example.atta.furnitureapplication.R;
+import com.example.atta.furnitureapplication.GenrelUtills.Utilities;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.zelory.compressor.Compressor;
+import ng.max.slideview.SlideView;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -85,10 +87,14 @@ public class AddItemsFragment extends Fragment {
     @BindView(R.id.tv_total_price)
     TextView tvTotalPrice;
 
+    @BindView(R.id.slideView)
+    SlideView slideView;
+
     private ImageView ivItemImage;
 
     private String strCanvasImage;
     private boolean aBooleanCanvas;
+
     public AddItemsFragment() {
         // Required empty public constructor
     }
@@ -102,10 +108,18 @@ public class AddItemsFragment extends Fragment {
         ButterKnife.bind(this, parentView);
         furniture_curd = new Furniture_CURD(getActivity());
 
+        slideView.setOnSlideCompleteListener(new SlideView.OnSlideCompleteListener() {
+            @Override
+            public void onSlideComplete(SlideView slideView) {
 
-         aBooleanCanvas = Utilities.getSharedPreferences(getActivity()).getBoolean("canvas",false);
+                Utilities.connectFragment(getContext(), new CalculationFragment());
+            }
+        });
 
-        if (aBooleanCanvas){
+
+        aBooleanCanvas = Utilities.getSharedPreferences(getActivity()).getBoolean("canvas", false);
+
+        if (aBooleanCanvas) {
 
             addItemDialog();
 
@@ -121,8 +135,7 @@ public class AddItemsFragment extends Fragment {
         gridView.setAdapter(new OrderGridAdapter(getActivity(), R.layout.custom_order_item_layout, furniture_models));
 
 
-        tvTotalPrice.setText(Utilities.getSharedPreferences(getActivity()).getString("total_price", ""));
-        Utilities.putValueInEditor(getActivity()).putString("total_price", "").commit();
+        slideView.setText("Total Amount : "+Utilities.getSharedPreferences(getActivity()).getString("total_price", "")+"             ");
 
 
         ivAddItem = parentView.findViewById(R.id.iv_add_item);
@@ -185,11 +198,11 @@ public class AddItemsFragment extends Fragment {
         final EditText etItemPrice = dialogView.findViewById(R.id.et_item_price);
         final Button btnDone = dialogView.findViewById(R.id.btn_item_done);
 
-        if (aBooleanCanvas){
-            String strCanvas = Utilities.getSharedPreferences(getActivity()).getString("canvas_image","");
+        if (aBooleanCanvas) {
+            String strCanvas = Utilities.getSharedPreferences(getActivity()).getString("canvas_image", "");
             image_uri = Uri.parse(strCanvas);
             ivItemImage.setImageURI(Uri.parse(strCanvas));
-            Utilities.putValueInEditor(getActivity()).putBoolean("canvas",false).commit();
+            Utilities.putValueInEditor(getActivity()).putBoolean("canvas", false).commit();
             aBooleanCanvas = false;
         }
 

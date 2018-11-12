@@ -1,4 +1,4 @@
-package com.example.atta.furnitureapplication;
+package com.example.atta.furnitureapplication.dataBase;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -8,16 +8,16 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.atta.furnitureapplication.adapter.Furniture_Model;
+import com.example.atta.furnitureapplication.view.activity.MainActivity;
+import com.example.atta.furnitureapplication.GenrelUtills.Utilities;
+import com.example.atta.furnitureapplication.view.fragment.AddItemsFragment;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

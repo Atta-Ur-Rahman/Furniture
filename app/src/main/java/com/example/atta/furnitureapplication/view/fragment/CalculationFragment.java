@@ -1,4 +1,4 @@
-package com.example.atta.furnitureapplication;
+package com.example.atta.furnitureapplication.view.fragment;
 
 
 import android.os.Bundle;
@@ -7,15 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.atta.furnitureapplication.GenrelUtills.Utilities;
+import com.example.atta.furnitureapplication.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment {
+public class CalculationFragment extends Fragment {
 
     private View parentView;
-
-    public MainFragment() {
+    private String strTotalAmount;
+    public CalculationFragment() {
         // Required empty public constructor
     }
 
@@ -24,6 +27,8 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         parentView = inflater.inflate(R.layout.fragment_main, container, false);
+
+        strTotalAmount = Utilities.getSharedPreferences(getActivity()).getString("total_price", "");
 
 
 

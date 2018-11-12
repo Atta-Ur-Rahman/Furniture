@@ -1,4 +1,4 @@
-package com.example.atta.furnitureapplication;
+package com.example.atta.furnitureapplication.view.fragment;
 
 
 import android.graphics.Bitmap;
@@ -10,9 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.ajithvgiri.canvaslibrary.CanvasView;
+import com.example.atta.furnitureapplication.R;
+import com.example.atta.furnitureapplication.GenrelUtills.Utilities;
 
 import java.io.File;
 import java.io.FileNotFoundException;

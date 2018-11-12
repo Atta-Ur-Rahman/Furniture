@@ -1,4 +1,4 @@
-package com.example.atta.furnitureapplication;
+package com.example.atta.furnitureapplication.dataBase;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -41,8 +41,11 @@ public class Furniture_DataBase extends SQLiteOpenHelper {
 
         String query = "CREATE TABLE ORDER_ITEM_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT,ITEM_NAME,ITEM_PRICE,PHONE_NUMBER,ITEM_IMAGE BLOB)";
         String query1 = "CREATE TABLE ORDER_NAME_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME,PHONE_NUMBER,ORDER_DATE,ORDER_PLACE_DATE,IMAGE_URI BLOB)";
+        String query2 = "CREATE TABLE BALANCE_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT,ADVANCE_PRICE,TOTAL_PRICE,PHONE_NUMBER,DATE)";
+
         db.execSQL(query);
         db.execSQL(query1);
+        db.execSQL(query2);
     }
 
     @Override

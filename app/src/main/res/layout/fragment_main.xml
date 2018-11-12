@@ -3,19 +3,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/wood_color"
+    tools:context=".view.fragment.CalculationFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="55sp"
+            android:background="@drawable/back_head">
 
-        </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:paddingLeft="30sp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:text="Holder Name"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/iv_add_item_call"
+                android:layout_width="35sp"
+                android:layout_height="35sp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="96dp"
+                android:layout_marginRight="96dp"
+                android:background="@drawable/call" />
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/iv_add_item"
+                android:layout_width="35sp"
+                android:layout_height="35sp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp"
+                android:background="@drawable/add" />
+
+        </RelativeLayout>
+
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="Enter Advance Amount"
+            app:met_floatingLabel="highlight"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+
+
     </LinearLayout>
 
 </FrameLayout>

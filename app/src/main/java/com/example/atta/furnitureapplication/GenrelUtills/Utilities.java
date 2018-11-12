@@ -1,4 +1,4 @@
-package com.example.atta.furnitureapplication;
+package com.example.atta.furnitureapplication.GenrelUtills;
 
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
@@ -23,6 +23,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.atta.furnitureapplication.R;
+import com.example.atta.furnitureapplication.view.activity.MainActivity;
 
 import java.util.Date;
 

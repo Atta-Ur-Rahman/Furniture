@@ -1,6 +1,6 @@
-package com.example.atta.furnitureapplication;
+package com.example.atta.furnitureapplication.adapter;
 
-class Furniture_Model {
+public class Furniture_Model {
 
 
     String id;

@@ -27,6 +27,7 @@
     <color name="light_wood_color">#e9322419</color>
     <color name="red">#ff0000</color>
     <color name="green">#0cc418</color>
+    <color name="slide_button">#FF21170F</color>
 
     <color name="bluelight">#1da1f2</color>
 </resources>

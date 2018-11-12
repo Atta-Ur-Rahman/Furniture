@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.activity.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,21 +31,23 @@
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
 
         <service
-            android:name=".OrderListFragment$OrderService"
+            android:name=".view.fragment.OrderListFragment$OrderService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Main2Activity" />
+        <activity android:name=".view.activity.Main2Activity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
 
         <service
-            android:name=".RemainderService"
+            android:name=".services.RemainderService"
             android:enabled="true"
             android:exported="true"></service>
 
 
 
         <receiver
-            android:name=".FurnitureRemainderReceiver"
+            android:name=".services.FurnitureRemainderReceiver"
             android:permission="android.permission.BROADCAST_SMS">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

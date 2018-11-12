@@ -1,4 +1,4 @@
-package com.example.atta.furnitureapplication;
+package com.example.atta.furnitureapplication.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,6 +17,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.atta.furnitureapplication.R;
+import com.example.atta.furnitureapplication.GenrelUtills.Utilities;
+import com.example.atta.furnitureapplication.dataBase.Furniture_CURD;
+import com.example.atta.furnitureapplication.view.activity.Main2Activity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -1,4 +1,4 @@
-package com.example.atta.furnitureapplication;
+package com.example.atta.furnitureapplication.view.fragment;
 
 
 import android.net.Uri;
@@ -8,19 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.atta.furnitureapplication.R;
+import com.example.atta.furnitureapplication.GenrelUtills.Utilities;
 import com.github.chrisbanes.photoview.PhotoView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PhotoViewFragment extends Fragment {
+public class ItemPhotoViewFragment extends Fragment {
 
 
     private View parentView;
 
 
-    public PhotoViewFragment() {
+    public ItemPhotoViewFragment() {
         // Required empty public constructor
     }
 

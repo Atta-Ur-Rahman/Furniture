@@ -1,11 +1,12 @@
-package com.example.atta.furnitureapplication;
+package com.example.atta.furnitureapplication.services;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
-import android.widget.Toast;
+
+import com.example.atta.furnitureapplication.GenrelUtills.Utilities;
+import com.example.atta.furnitureapplication.dataBase.Furniture_CURD;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

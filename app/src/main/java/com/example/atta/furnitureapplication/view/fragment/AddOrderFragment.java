@@ -1,4 +1,4 @@
-package com.example.atta.furnitureapplication;
+package com.example.atta.furnitureapplication.view.fragment;
 
 
 import android.Manifest;
@@ -21,15 +21,14 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.atta.furnitureapplication.dataBase.Furniture_CURD;
+import com.example.atta.furnitureapplication.R;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.File;
@@ -50,7 +49,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OrderFragment extends Fragment implements View.OnClickListener {
+public class AddOrderFragment extends Fragment implements View.OnClickListener {
 
     private View parentView;
 
@@ -89,7 +88,7 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
     private DatePickerDialog.OnDateSetListener date;
 
 
-    public OrderFragment() {
+    public AddOrderFragment() {
         // Required empty public constructor
     }
 
