@@ -19,11 +19,6 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".view.activity.MainActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
@@ -35,27 +30,35 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".view.activity.Main2Activity"
+        <activity
+            android:name=".view.activity.Main2Activity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".services.RemainderService"
             android:enabled="true"
-            android:exported="true"></service>
-
-
+            android:exported="true" />
 
         <receiver
             android:name=".services.FurnitureRemainderReceiver"
             android:permission="android.permission.BROADCAST_SMS">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
+        <activity android:name=".view.activity.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

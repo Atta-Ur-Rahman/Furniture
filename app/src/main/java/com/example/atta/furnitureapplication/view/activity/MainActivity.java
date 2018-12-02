@@ -1,29 +1,43 @@
 package com.example.atta.furnitureapplication.view.activity;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
+import android.os.StrictMode;
+import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -32,13 +46,24 @@ import com.example.atta.furnitureapplication.GenrelUtills.Utilities;
 import com.example.atta.furnitureapplication.dataBase.Furniture_CURD;
 import com.example.atta.furnitureapplication.services.RemainderService;
 import com.example.atta.furnitureapplication.view.fragment.ActiveOrderListFragment;
+import com.example.atta.furnitureapplication.view.fragment.AddItemsFragment;
 import com.example.atta.furnitureapplication.view.fragment.AddOrderFragment;
 import com.example.atta.furnitureapplication.view.fragment.OrderListFragment;
+import com.theartofdev.edmodo.cropper.CropImage;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import butterknife.BindView;
+import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,6 +78,25 @@ public class MainActivity extends AppCompatActivity {
 
     private Furniture_CURD furniture_curd;
 
+
+    @BindView(R.id.iv_order_image)
+    CircleImageView ivOrderImage;
+
+    @BindView(R.id.et_order_name)
+    EditText etOrderName;
+
+    @BindView(R.id.et_order_phone_number)
+    EditText etOrderPhoneNumber;
+
+    @BindView(R.id.et_view_item_order_place_time)
+    TextView etOrderPlaceTime;
+    @BindView(R.id.et_view_item_order_order_time)
+    TextView etOrderTime;
+
+    @BindView(R.id.btn_oder_done)
+    Button btnOrderDone;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
         furniture_curd = new Furniture_CURD(this);
 
-            startService(new Intent(MainActivity.this, RemainderService.class));
-
+        startService(new Intent(MainActivity.this, RemainderService.class));
 
 
         toolbar = findViewById(R.id.toolbar);
@@ -100,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ActiveOrderListFragment(), "ACTIVE ORDERS");
         adapter.addFragment(new OrderListFragment(), "ALL ORDERS");
-        adapter.addFragment(new AddOrderFragment(), "ADD ORDER");
+//        adapter.addFragment(new AddOrderFragment(), "ADD ORDER");
         viewPager.setAdapter(adapter);
 
 
@@ -160,7 +203,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.action_add_order:
+            case R.id.action_add_menu:
+
+                Utilities.putValueInEditor(this).putBoolean("menu_add", true).commit();
+                startActivity(new Intent(MainActivity.this, Main2Activity.class));
+
 
                 break;
             case R.id.action_change_notification_day:
@@ -172,11 +219,22 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         furniture_curd.CheckAllBalence(MainActivity.this);
+                        furniture_curd.CheckTotalAvance(MainActivity.this);
 
                         String strBalence = Utilities.getSharedPreferences(MainActivity.this).getString("total_balance", "");
+                        String strAdvance = Utilities.getSharedPreferences(MainActivity.this).getString("total_advance", "");
+
+                        double bal = Double.parseDouble(strBalence);
+                        double advance = Double.parseDouble(strAdvance);
+                        double arrears = bal - advance;
+
+                        DecimalFormat format = new DecimalFormat("#00,00,000.00");
+                        String formattedNumber = format.format(arrears);
+
+
                         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(MainActivity.this);
                         pictureDialog.setTitle("Total Balance");
-                        String[] pictureDialogItems = {"\t RS: " + strBalence};
+                        String[] pictureDialogItems = {"\t RS: " + strBalence, "\t Advance: " + strAdvance, "\t Arrears: " + formattedNumber};
                         pictureDialog.setItems(pictureDialogItems, null);
                         pictureDialog.show();
                     }
@@ -257,16 +315,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

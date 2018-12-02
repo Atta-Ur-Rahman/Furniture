@@ -28,6 +28,7 @@
     <color name="red">#ff0000</color>
     <color name="green">#0cc418</color>
     <color name="slide_button">#FF21170F</color>
+    <color name="calculation_layoyt_color">#FF995C2D</color>
 
     <color name="bluelight">#1da1f2</color>
 </resources>

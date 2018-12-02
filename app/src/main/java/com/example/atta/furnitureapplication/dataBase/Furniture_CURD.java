@@ -15,6 +15,7 @@ import com.example.atta.furnitureapplication.adapter.Furniture_Model;
 import com.example.atta.furnitureapplication.view.activity.MainActivity;
 import com.example.atta.furnitureapplication.GenrelUtills.Utilities;
 import com.example.atta.furnitureapplication.view.fragment.AddItemsFragment;
+import com.example.atta.furnitureapplication.view.fragment.CalculationFragment;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,7 +55,7 @@ public class Furniture_CURD {
             values.put("ORDER_PLACE_DATE", strOrderPlaceDate);
             values.put("IMAGE_URI", strImageUri);
 
-            Utilities.putValueInEditor(context).putBoolean("new_order_update",true).commit();
+            Utilities.putValueInEditor(context).putBoolean("new_order_update", true).commit();
             ((Activity) context).finish();
             context.startActivity(new Intent(context, MainActivity.class));
             Toast.makeText(context, "Successful", Toast.LENGTH_SHORT).show();
@@ -95,7 +96,7 @@ public class Furniture_CURD {
 
             sqLiteDatabase.insert("ORDER_ITEM_TABLE", null, values);
             Toast.makeText(context, "Successful", Toast.LENGTH_SHORT).show();
-            Utilities.withOutBackStackConnectFragment(context, new AddItemsFragment());
+            Utilities.withOutBackStackConnectFragmentWithOutAnimination(context, new AddItemsFragment());
 
         }
     }
@@ -123,25 +124,9 @@ public class Furniture_CURD {
         if (cursor.moveToFirst()) {
             this.sqLiteDatabase.delete("ORDER_NAME_TABLE", "PHONE_NUMBER = '" + strPhone + "'", null);
             this.sqLiteDatabase.delete("ORDER_ITEM_TABLE", "PHONE_NUMBER = '" + strPhone + "'", null);
+            this.sqLiteDatabase.delete("BALANCE_TABLE", "PHONE_NUMBER = '" + strPhone + "'", null);
 
 
-            String strImageUri = (cursor.getString(cursor.getColumnIndex("IMAGE_URI")));
-
-            Toast.makeText(context, strImageUri, Toast.LENGTH_SHORT).show();
-
-            Uri image_uri = Uri.parse(strImageUri);
-            File file = new File(image_uri.getPath());
-            file.delete();
-            if (file.exists()) {
-                try {
-                    file.getCanonicalFile().delete();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (file.exists()) {
-                    context.getApplicationContext().deleteFile(file.getName());
-                }
-            }
 
             Toast.makeText(context, "Remove", Toast.LENGTH_SHORT).show();
             ((Activity) context).finish();
@@ -268,9 +253,8 @@ public class Furniture_CURD {
                     long differenceBetweenDateLong = Utilities.printDifference(date1, date2);
 
 
-
-                    int alarmDay =  Utilities.getSharedPreferences(context).getInt("alarm_day",0);
-                    if (differenceBetweenDateLong >alarmDay) {
+                    int alarmDay = Utilities.getSharedPreferences(context).getInt("alarm_day", 0);
+                    if (differenceBetweenDateLong > alarmDay) {
 
                         furniture_model.setItem_name(name);
                         furniture_model.setPhone_number(number);
@@ -324,13 +308,13 @@ public class Furniture_CURD {
 
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("dd MM yyyy");
                 try {
-                    Date date1 = dateFormat.parse(dateOfDay );
+                    Date date1 = dateFormat.parse(dateOfDay);
                     Date date2 = dateFormat.parse(str_order_date);
 
                     long differenceBetweenDateLong = Utilities.printDifference(date1, date2);
 
 
-                    int alarmDay =  Utilities.getSharedPreferences(context).getInt("alarm_day",0);
+                    int alarmDay = Utilities.getSharedPreferences(context).getInt("alarm_day", 0);
                     if (differenceBetweenDateLong <= alarmDay) {
                         furniture_model.setItem_name(name);
                         furniture_model.setPhone_number(number);
@@ -379,7 +363,7 @@ public class Furniture_CURD {
         return list;
     }
 
-    public void CheckAllBalence(Context context){
+    public void CheckAllBalence(Context context) {
         Cursor cursors = sqLiteDatabase.rawQuery(
                 "SELECT SUM(ITEM_PRICE) FROM ORDER_ITEM_TABLE ", null);
         if (cursors.moveToFirst()) {
@@ -392,5 +376,109 @@ public class Furniture_CURD {
 
         }
     }
+
+
+    public void insertPayment(String strName, String strAdvance, String strPhoneNumber, String strDate) {
+//
+//        Cursor cursor = this.sqLiteDatabase.rawQuery("SELECT * FROM BALANCE_TABLE WHERE PHONE_NUMBER = '" + strPhoneNumber + "' ", null);
+//
+//        if (cursor.moveToFirst()) {
+//
+////            Toast.makeText(context, "Already Exist ", Toast.LENGTH_SHORT).show();
+//
+//        } else {
+            ///here insert new student in database
+            ContentValues values = new ContentValues();
+            values.put("NAME", strName);
+            values.put("ADVANCE_PRICE", strAdvance);
+            values.put("PHONE_NUMBER", strPhoneNumber);
+            values.put("DATE", strDate);
+
+            Toast.makeText(context, "Successful", Toast.LENGTH_SHORT).show();
+            sqLiteDatabase.insert("BALANCE_TABLE", null, values);
+
+            Utilities.withOutBackStackConnectFragmentWithOutAnimination(context,new CalculationFragment());
+
+
+//        }
+    }
+
+
+    @SuppressLint("ResourceAsColor")
+    public List<Furniture_Model> ReadPayment(Context context,String strPhone) {
+
+        Utilities.putValueInEditor(context).putString("total_advance","").commit();
+
+        List<Furniture_Model> list = new ArrayList<>();
+        Cursor cursor = this.sqLiteDatabase.rawQuery("SELECT * FROM BALANCE_TABLE WHERE PHONE_NUMBER = '" + strPhone + "' ", null);
+
+        if (cursor.moveToFirst()) {
+
+            if (cursor.moveToFirst()) {
+                do {
+
+
+                    Furniture_Model furniture_model = new Furniture_Model();
+                    String id = (cursor.getString(cursor.getColumnIndex("ID")));
+                    furniture_model.setId(id);
+                    String name = (cursor.getString(cursor.getColumnIndex("NAME")));
+                    furniture_model.setStrPaymentName(name);
+                    String strAdvance = (cursor.getString(cursor.getColumnIndex("ADVANCE_PRICE")));
+                    furniture_model.setStrAdvance(strAdvance);
+                    String strDate = (cursor.getString(cursor.getColumnIndex("DATE")));
+                    furniture_model.setStrDate(strDate);
+
+
+                    list.add(furniture_model);
+
+                } while (cursor.moveToNext());
+            }
+
+
+      /////here sum of total advance
+            Cursor cursors = sqLiteDatabase.rawQuery(
+                    "SELECT SUM(ADVANCE_PRICE) FROM BALANCE_TABLE WHERE PHONE_NUMBER = '" + strPhone + "' ", null);
+
+
+            if (cursors.moveToFirst()) {
+                Utilities.putValueInEditor(context).putString("total_advance",String.valueOf(cursors.getInt(0))).commit();
+
+            }
+
+
+        } else {
+            Toast.makeText(context, "no exist", Toast.LENGTH_SHORT).show();
+        }
+
+        ///sum adding colum
+
+        return list;
+    }
+
+
+
+    @SuppressLint("ResourceAsColor")
+    public void CheckTotalAvance(Context context) {
+
+        Utilities.putValueInEditor(context).putString("total_advance","").commit();
+
+        List<Furniture_Model> list = new ArrayList<>();
+
+            /////here sum of total advance
+            Cursor cursors = sqLiteDatabase.rawQuery(
+                    "SELECT SUM(ADVANCE_PRICE) FROM BALANCE_TABLE ", null);
+
+
+            if (cursors.moveToFirst()) {
+                Utilities.putValueInEditor(context).putString("total_advance",String.valueOf(cursors.getInt(0))).commit();
+            }
+
+
+
+
+        ///sum adding colum
+
+    }
+
 
 }

@@ -93,6 +93,7 @@
             android:textSize="18sp"
             android:textStyle="bold"/>
 
+
         <ng.max.slideview.SlideView
             android:id="@+id/slideView"
             android:layout_width="match_parent"

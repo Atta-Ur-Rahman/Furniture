@@ -58,12 +58,31 @@ public class Utilities {
 
 
     public static Fragment connectFragment(Context context, Fragment fragment) {
-        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fragment_container, fragment).addToBackStack("true").commit();
+        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().setCustomAnimations(R.animator.fade_in, R.animator.fade_out).replace(R.id.fragment_container, fragment).addToBackStack("true").commit();
+        return fragment;
+    }
+
+
+
+    public static Fragment withOutBackStackConnectFragmentWithOutAnimination(Context context, Fragment fragment) {
+        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().setCustomAnimations(R.animator.fade_in, R.animator.fade_out).replace(R.id.fragment_container, fragment).commit();
+        return fragment;
+    }
+
+
+    public static Fragment withOutBackStackConnectFragmentDailog(Context context, Fragment fragment) {
+        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.dialog_view, fragment).commit();
+        return fragment;
+    }
+
+
+    public static Fragment connectFragmentWithOutAnimination(Context context, Fragment fragment) {
+        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().setCustomAnimations(R.animator.fade_in, R.animator.fade_out).replace(R.id.fragment_container, fragment).addToBackStack("true").commit();
         return fragment;
     }
 
     public static Fragment withOutBackStackConnectFragment(Context context, Fragment fragment) {
-        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fragment_container, fragment).commit();
+        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().setCustomAnimations(R.animator.fade_in, R.animator.fade_out).replace(R.id.fragment_container, fragment).commit();
         return fragment;
     }
 

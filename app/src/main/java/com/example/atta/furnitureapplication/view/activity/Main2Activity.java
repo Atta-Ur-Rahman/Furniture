@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.example.atta.furnitureapplication.R;
 import com.example.atta.furnitureapplication.GenrelUtills.Utilities;
 import com.example.atta.furnitureapplication.view.fragment.AddItemsFragment;
+import com.example.atta.furnitureapplication.view.fragment.AddOrderFragment;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -13,6 +14,14 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Utilities.connectFragment(this, new AddItemsFragment());
+
+        if (Utilities.getSharedPreferences(this).getBoolean("menu_add", false)) {
+
+            Utilities.withOutBackStackConnectFragment(this, new AddOrderFragment());
+            Utilities.putValueInEditor(this).putBoolean("menu_add", false).commit();
+        } else {
+            Utilities.connectFragment(this, new AddItemsFragment());
+        }
+
     }
 }

@@ -112,7 +112,9 @@ public class AddItemsFragment extends Fragment {
             @Override
             public void onSlideComplete(SlideView slideView) {
 
-                Utilities.connectFragment(getContext(), new CalculationFragment());
+
+                Utilities.connectFragment(getActivity(),new CalculationFragment());
+
             }
         });
 
@@ -197,6 +199,7 @@ public class AddItemsFragment extends Fragment {
         final EditText etItemName = dialogView.findViewById(R.id.et_item_name);
         final EditText etItemPrice = dialogView.findViewById(R.id.et_item_price);
         final Button btnDone = dialogView.findViewById(R.id.btn_item_done);
+
 
         if (aBooleanCanvas) {
             String strCanvas = Utilities.getSharedPreferences(getActivity()).getString("canvas_image", "");

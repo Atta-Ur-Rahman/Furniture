@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="35sp"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:layout_marginTop="10sp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@color/calculation_layoyt_color">
+
+    <TextView
+        android:id="@+id/tv_payment_name"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Name"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Date"
+        android:textColor="@color/white"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_payment"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Payment"
+        android:textColor="@color/white"
+        android:textSize="16dp"/>
+</LinearLayout>

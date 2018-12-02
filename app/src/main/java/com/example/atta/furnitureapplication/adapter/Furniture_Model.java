@@ -13,6 +13,8 @@ public class Furniture_Model {
     String total_price;
     int alarm_blink_day;
 
+
+    String strPaymentName,strAdvance,strDate,strTotalAdvance;
     public String getId() {
         return id;
     }
@@ -87,4 +89,36 @@ public class Furniture_Model {
         this.alarm_blink_day = alarm_blink_day;
     }
 
+
+    public String getStrPaymentName() {
+        return strPaymentName;
+    }
+
+    public void setStrPaymentName(String strPaymentName) {
+        this.strPaymentName = strPaymentName;
+    }
+
+    public String getStrAdvance() {
+        return strAdvance;
+    }
+
+    public void setStrAdvance(String strAdvance) {
+        this.strAdvance = strAdvance;
+    }
+
+    public String getStrDate() {
+        return strDate;
+    }
+
+    public void setStrDate(String strDate) {
+        this.strDate = strDate;
+    }
+
+    public String getStrTotalAdvance() {
+        return strTotalAdvance;
+    }
+
+    public void setStrTotalAdvance(String strTotalAdvance) {
+        this.strTotalAdvance = strTotalAdvance;
+    }
 }

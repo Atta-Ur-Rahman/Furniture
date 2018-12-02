@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,8 +54,9 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
 
     private View parentView;
 
+    @BindView(R.id.iv_cross_order)ImageView ivCrossOrder;
     @BindView(R.id.iv_order_image)
-    CircleImageView ivOrderImage;
+    ImageView ivOrderImage;
 
     @BindView(R.id.et_order_name)
     EditText etOrderName;
@@ -106,6 +108,7 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
 
         initCalendar();
 
+        ivCrossOrder.setOnClickListener(this);
         ivOrderImage.setOnClickListener(this);
         etOrderPlaceTime.setOnClickListener(this);
         etOrderTime.setOnClickListener(this);
@@ -238,6 +241,10 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            case R.id.iv_cross_order:
+                getActivity().finish();
+                break;
             case R.id.iv_order_image:
 
                 pickUpImagedialog();
@@ -267,7 +274,7 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
                     etOrderName.setError("enter name");
                 } else if (etOrderPhoneNumber.getText().length() <= 10) {
                     etOrderPhoneNumber.setError("enter valid phone number");
-                } else if (etOrderPlaceTime.getText() == null) {
+                } else if (etOrderPlaceTime.getText().length() <= 1) {
                     etOrderPlaceTime.setError("enter order place time");
                 } else if (etOrderTime.getText().length() <= 1) {
                     etOrderTime.setError("enter order time");
@@ -279,7 +286,11 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
                     strOrderDate = etOrderTime.getText().toString();
 
                     if (furniture_curd.checkOrderExist(strOrderPhoneNumber)) {
-                        furniture_curd.insertOrder(strOrderName, strOrderPhoneNumber, strOrderDate, strOrderPlaceDate, String.valueOf(image_uri));
+
+                        String name  = strOrderName;
+                        name = name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase();
+
+                        furniture_curd.insertOrder(name, strOrderPhoneNumber, strOrderDate, strOrderPlaceDate, String.valueOf(image_uri));
                     }
                 }
 
@@ -317,7 +328,6 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
 
                 image_uri = Uri.parse("null_image");
                 ivOrderImage.setImageURI(Uri.parse("android.resource://" + getActivity().getPackageName() + "/drawable/ic_close"));
-
                 pickUpImageDialog.dismiss();
             }
         });

@@ -3,6 +3,7 @@ package com.example.atta.furnitureapplication.view.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,6 +31,9 @@ public class ActiveOrderListFragment extends Fragment {
     private List<Furniture_Model> furniture_models;
     private Furniture_CURD furniture_curd;
 
+
+
+    @BindView(R.id.pager)ViewPager viewPager;
     @BindView(R.id.rv_order_last_list)RecyclerView rvOrderList;
 
     public ActiveOrderListFragment() {
